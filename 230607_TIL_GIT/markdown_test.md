@@ -56,7 +56,7 @@ print("hello")
 
 !표를 사용하면 이미지도 삽입 가능
 
-![이미지](./a.jpg)
+![이미지](./image_test.jpg)
 
 <br>
 

@@ -204,11 +204,12 @@
 
     <script>
 
-        // onload = onload=function()
+        // onload=function()
         // 윈도우(브라우저)가 로딩될 때 function 실행
         // 이벤트를 연결시켜주는 것
 
         onload=function(){
+
             document.getElementsByTagName("button")[0].onclick = testDate01;
             document.getElementsByTagName("button")[1].onclick = testDate02;
             document.getElementsByTagName("button")[2].onclick = testDate03;
@@ -241,44 +242,62 @@
         function testDate02(){
             var dayOfWeek = ["일", "월", "화", "수", "목", "금", "토"]
 
-            // 2023/06/13으로 출력
+            // 오늘 날짜 출력하기
             // 오늘 날짜 데이트 객체에서 연, 월, 일을 따로 가져와야 함
-            // 2023/06/13 (화)으로 출력
+            // 2023/06/13 (화) 형태로 출력
 
             var today = new Date();
 
-            var year = today.getFullYear();
+            var year = today.getFullYear(); // 현재 연도(4자리 숫자)
+            // console.log(year);
+
             // getMonth() : Get month as a number (0-11) 0부터 시작한다
-            var month = today.getMonth() + 1;
+            var month = today.getMonth() + 1; // 현재 월
+
             var day = today.getDate();
+            
             // the first day of the week (day 0) is Sunday.
+            // today.getDay() : Date 객체에서 현재 요일을 나타내는 정수를 반환
+            // (0은 일요일, 1은 월요일, ..., 6은 토요일)
             var weekDay = dayOfWeek[today.getDay()];
+            // var weekDay = dayOfWeek[2];
+
 
             // document.getElementById("today").innerHTML = year + "/" + month + "/" + day;
-            document.getElementById("today").innerHTML = year + "/" + month + "/" + day + "(" + weekDay+")";
+            document.getElementById("today").innerHTML = year + "/" + month + "/" + day + "(" + weekDay + ")";
         }
 
 
         function testDate03(){
 
-            // 자바스크립드의 월은 0부터 시작함
+            // 2023년 10월 31일 출력하고 싶다면?
+
             var year = 2023;
             var month = 10;
             var day = 31;
+
+            // 자바스크립드의 월은 0부터 시작함
             var date = new Date(year, month -1, day);
 
             document.getElementById("specific").innerHTML = date;
         }
 
+
         function testDate04(){
-            // .value를 붙이면 데이스트링 값만 가져오겠다는 뜻 (년-월-일)
+
+            // .value : 선택된 요소의 값만 가져오겠다는 뜻 (년-월-일)
+            // 캘린더에서 날짜 클릭하는 방식으로 velue를 받으니까
             var dates = document.getElementById("dates").value;
-            // console.log(dates);
-            // input 태그에서 가져오면 string
+            console.log(dates);
+
+            // input 태그에서 가져오면 string (문자열)
             var inputDate = document.getElementById("inputDate").value;
-            // console.log(inputDate);
-            // console.log(typeof(inputDate));
+            console.log(inputDate);
+            console.log(typeof(inputDate)); // string
+
+            // 위에서 받은 dates 날짜를 기반으로 새로운 date 객체를 생성
             var date = new Date(dates);
+
             // getDate() : 가져 오는 것
             // setDate() : 값을 넣는 것 (그 안에 add days가 있음)
             date.setDate(date.getDate() + parseInt(inputDate));
@@ -293,11 +312,12 @@
             // getTime() 이용하여 D-Day 구하자!
             // 6월 13일, 10월 31일 입력하면 남은 일수 나오도록
 
+            // 클래스 이름이 "dday"인 모든 요소를 선택하여 inputList라는 변수에 할당
             var inputList = document.getElementsByClassName("dday");
             console.log(inputList);
             // 클래스에서 날짜 값을 가져옴
-            var start = inputList[0].value;
-            var end = inputList[1].value;
+            var start = inputList[0].value; // 시작 날짜
+            var end = inputList[1].value; // 종료 날짜
             // console.log(start);
             // console.log(end);
 
@@ -312,12 +332,19 @@
 
             inputList[2].value = result;
 
-
         }
 
-
-
         // textContent랑 innerHTML의 차이는?
+
+        // textContent :
+        // HTML 태그를 포함한 텍스트를 그대로 반환
+        // HTML 태그는 일반 텍스트로 취급
+        // <div>나 <p>와 같은 HTML 태그도 그냥 문자열로 간주
+
+        // innerHTML : 
+        // HTML 내용을 다루는 데 사용
+        // 텍스트와 함께 HTML 태그를 포함한 문자열을 다룸 (보안 문제 있음)
+
 
     </script>
 </head>
@@ -338,10 +365,12 @@
 
     <h1>경과 날짜 구하기</h1>
     <label>지정 날짜</label>
-    <input type = "date" id="dates">
+    <input type = "date" id="dates"> 
+    <!-- 캘린더 형식으로 인풋 값을 받는다 value가 생긴다 -->
     <br/>
     <label>경과일</label>
     <input type = "number" id="inputDate">
+    <!-- 빈칸에 날짜를 입력하는 형식으로 인풋 값을 받는다 value가 생긴다 -->
     <br/>
     <label>경과 후 날짜</label>
     <input type = "text" id="result" readonly>
@@ -394,6 +423,7 @@
         }
 
         function multiArr(){
+
             // 3칸으로 나누고 그 안에 각각 3칸씩
             var arrLen = 3;
             var arr = new Array(arrLen);
@@ -412,7 +442,8 @@
             arr[2][1] = ["css", "javascript", "jquery"];
             arr[2][2] = ["django", ["machine learning", "deep learning"]];
 
-            // alert(arr); // 배열을 호출하면 쭉 나옴
+            alert(arr); 
+            // 배열을 호출하면 쭉 나옴
             // alert(arr.toString());
             // alert(arr[0]) // 수박, 오렌지, 귤
             // alert(arr[2][1][1]) // javascript
@@ -422,7 +453,7 @@
         function joinTest(){
             var arr = ["1", "2", "3", "4", "5"].join("+");
             alert(arr);
-            alert(eval(arr)); //문자열로 표현된 코드를 실행함 (보안 취약)
+            alert(eval(arr)); // eval : 문자열로 표현된 코드를 실행함 (보안 취약)
         } 
 
         function sortTest01(){
@@ -433,18 +464,32 @@
 
         function sortTest02(){
             var arr = [1, 3, 2, 9, 5, 11, 24];
-            arr.sort(compareNum); // 아스키코드 순으로 정렬이 됨
+            // 원래 배열을 sort하면 문자열로 비교 (유니 코드 코드 포인트 순)
+            // compareNum 함수를 사용해서 숫자로 정렬 가능
+            arr.sort(compareNum); 
             alert(arr);
         }
 
-        // compareFunction 정렬 순서를 정의하는 함수
         // 왜 a - b 일까?
-        // https://developer.mozilla.org/ko/docs/Web/JavaScript/Reference/Global_Objects/Array/sort
-        function compareNum(a, b){ 
+        // compareFunction(a, b)이 0보다 작으면
+        // a를 b보다 낮은 색인으로 정렬! 즉, a가 먼저옴
+
+        // compareFunction(a, b)이 0이면
+        //  a와 b를 서로에 대해 변경하지 않고 모든 다른 요소에 대해 정렬
+
+        // compareFunction(a, b)이 0보다 크면
+        // b를 a보다 낮은 인덱스로 정렬
+
+        function compareNum(a, b){ //오름차순
             return a - b;
         }
 
+        
         // 내림차순으로 정렬하기(복습)
+        function compareNum(a, b){ //내림차순
+            return b - a;
+        }
+
         function reverseTest(){
             var arr = [19, 2, 22, 41, 33, 17];
             arr.reverse();
@@ -462,13 +507,13 @@
             console.log(queue);
             console.log("-----");
 
-            // shift : 오른쪽 첫 번째 요소를 잘라내기 해서 꺼내옴
+            // shift : 왼쪽 첫 번째 요소를 잘라내기 해서 꺼내옴
             var a = queue.shift();
             console.log("a : " +a)
             console.log(queue)
             console.log("-----");
 
-            // pop : 왼쪽 맨 뒤에 요소를 잘라내기 해서 가져옴
+            // pop : 오른쪽 맨 뒤에 요소를 잘라내기 해서 가져옴
             var b = queue.pop()
             console.log("b : " +b)
             console.log(queue)
@@ -476,12 +521,13 @@
         
         function sliceTest(){
             var arrayTest01 = new Array(1, 2, 3, 4, 5, 6, 7);
-            var array01 = arrayTest01.slice(1, 3); // 인덱스 1부터 3전까지
+            var array01 = arrayTest01.slice(1, 3); // 인덱스 1부터 3전까지 (2, 3)
             alert(array01);
 
-            // arrayTest02 : 4칸 만들어져 있고 그 안에 각각 2칸씩 나뉘어짐
+            // arrayTest02 : 길이가 4인 배열
             var arrayTest02 = new Array(4);
 
+            // 배열의 인덱스 [0]에 새로운 길이가 2인 배열을 할당
             arrayTest02[0] = new Array(1, 2);
             arrayTest02[1] = new Array(3, 4);
             arrayTest02[2] = new Array(5, 6);

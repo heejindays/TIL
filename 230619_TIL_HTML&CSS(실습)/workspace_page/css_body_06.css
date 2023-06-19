@@ -1,0 +1,28 @@
+#body_6{
+
+    top: 4700px;
+    height: 200px;
+    width: 1000px;
+    left:600px;
+    max-width: 1200px;
+    min-width: 500px;
+    position: absolute;
+    outline: none;
+    background-color: white;
+    /* border: 1px dashed green;     */
+}
+
+#body_6_items{
+    display: flex;
+    justify-content: center;
+}
+
+.inline-p{
+    display: flex;
+    justify-content: center;
+    left:0px;
+    text-align: center;
+    font-size: 16px;
+    display: inline;
+    margin-right: 48px;
+}

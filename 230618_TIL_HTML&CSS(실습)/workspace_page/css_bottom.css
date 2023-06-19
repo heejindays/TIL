@@ -1,0 +1,69 @@
+/* 마지막 구역 */
+#body_bottom{
+    top: 370px;
+    height: 200px;
+    left: -50px;
+    width: 1100px;
+    max-width: 900px;
+    min-width: 320px;
+    margin: 0px;
+    position: absolute;
+    outline: none;
+    background-color: white;
+    line-height: 0.5;
+    font-size: 13px;
+    color: gray;
+    border: 1px dashed green;
+}
+
+
+.body_bottom_2{
+    display: inline-block;
+    margin-right: 20px;
+}
+
+
+#body_bottom_right{
+    top: 20px;
+    height: 50px;
+    left: 500px;
+    width: 300px;
+    max-width: 900px;
+    min-width: 320px;
+    margin: 0px;
+    position: absolute;
+    outline: none;
+    border: 1px dashed pink;
+}
+
+#body_bottom_right_1{
+    width: 30px;
+    height: auto;
+}
+
+#body_bottom_right_2{
+    width: 30px;
+    height: auto;
+    position: relative;
+    left: 20px;
+}
+
+#body_bottom_right_3{
+    width: 28px;
+    height: 28px;
+    position: relative;
+    left: 42px;
+}
+
+#body_bottom_right_4{
+    width: 28px;
+    height: 28px;
+    position: relative;
+    left: 62px;
+}
+
+#body_bottom_drop{
+    left: 740px;
+    top: -215px;
+    position: relative;
+}

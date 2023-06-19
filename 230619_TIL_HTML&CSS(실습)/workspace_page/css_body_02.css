@@ -1,0 +1,72 @@
+/* <!-- 두 번째 본문 구역 --> */
+#body_2{
+    height: 800px;
+    padding : 0px;
+    margin: 60px;
+    outline: none;
+    background-color: white;
+    display: flex;
+    /* border: 1px dashed green; */
+}
+
+#body_2_img{
+    width: 532px;
+    top: 800px;
+    height: auto;
+    position: absolute;
+    left: 400px;
+}
+
+#body_2_right_top_1{
+    height: 150px;
+    width: 500px;
+    top: 200px;
+    left: 1000px;
+    position: relative;
+    font-size: 40px;
+    display: flex;
+    /* border: 1px dashed blue; */
+}
+
+#body_2_right_top_2{
+    height: 600px;
+    width: 500px;
+    top: 350px;
+    left: 500px;
+    position: relative;
+    font-size: 16px;
+    display: flex;
+    /* border: 1px dashed blue; */
+}
+
+#body_2_right_btn_1 button{
+    height: 50px;
+    width: 150px;
+    position: relative;
+    left : 0px;
+    top : 430px;
+    background-color: #F2F3F6;
+    font-size: 18px;
+    border-radius: 10px;
+    border: none;
+}
+
+#body_2_right_btn_2 button{
+    height: 50px;
+    width: 220px;
+    position: relative;
+    left : 20px;
+    top : 430px;
+    background-color: #F2F3F6;
+    font-size: 18px;
+    border-radius: 10px;
+    border: none;
+}
+
+#body_2_right_btn_1 button:hover{
+    background-color:  rgb(238, 234, 234);
+  }
+
+  #body_2_right_btn_2 button:hover{
+    background-color:  rgb(238, 234, 234);
+  }

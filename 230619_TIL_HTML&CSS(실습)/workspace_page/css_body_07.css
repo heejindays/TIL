@@ -1,0 +1,127 @@
+#body_7{
+    top: 4950px;
+    height: 350px;
+    left:550px;
+    width: 100%;
+    max-width: 900px;
+    min-width: 320px;
+    margin: 0px;
+    position: absolute;
+    outline: none;
+    background-color: white;
+    /* border: 1px dashed green;     */
+}
+
+#body_7_left{
+    top: 0px;
+    height: 300px;
+    width: 400px;
+    left:50px;
+    position: relative;
+    outline: none;
+    font-size: 14px;
+    background-color: white;
+    /* border: 1px dashed red;     */
+}
+
+
+#body_7_left_1{
+    top: px;
+    height: 300px;
+    width: 150px;
+    left:0px;
+    position: relative;
+    outline: none;
+    background-color: white;
+    /* border: 1px dashed pink;     */
+}
+
+a{
+    margin: 0px;
+    text-decoration : none;
+    color: black;
+}
+
+#body_7_left_2{
+    top: -315px;
+    height: 300px;
+    width: 150px;
+    left: 150px;
+    position: relative;
+    outline: none;
+    background-color: white;
+    /* border: 1px dashed pink;     */
+}
+
+#body_7_left_3{
+    top: -95px;
+    height: 300px;
+    width: 150px;
+    left: 150px;
+    position: relative;
+    outline: none;
+    background-color: white;
+    /* border: 1px dashed pink;     */
+}
+
+#body_7_right {
+    top: -410px;
+    height: 200px;
+    width: 400px;
+    left: 300px;
+    position: relative;
+    outline: none;
+    background-color: white;
+    /* border: 1px dashed pink;     */
+}
+
+#body_7_right_btn_1{
+    height: 44px;
+    width: 147px;
+    position: relative;
+    left : 0px;
+    top : -20px;
+    background-color: #F2F3F6;
+    font-size: 18px;
+    border-radius: 10px;
+    display: inline-block;
+    border: none;
+    align-items: center;
+    text-align: center;
+}
+
+#body_7_right_btn_apple{
+    width: 90px;
+    height: auto;
+    border: none;
+    border-radius: 10px;
+    text-align: center;
+    align-items: center;
+    vertical-align: middle;
+}
+
+
+#body_7_right_btn_2{
+    height: 44px;
+    width: 147px;
+    position: relative;
+    left : 170px;
+    top : -80px;
+    background-color: #F2F3F6;
+    font-size: 18px;
+    border-radius: 10px;
+    display: inline-block;
+    border: none;
+    align-items: center;
+    text-align: center;
+}
+
+#body_7_right_btn_google{
+    width: 110px;
+    height: auto;
+    border: none;
+    border-radius: 10px;
+    text-align: center;
+    align-items: center;
+    vertical-align: middle;
+}

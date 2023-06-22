@@ -1,0 +1,32 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+</head>
+<body>
+
+    <a href="var01/">var01</a>
+    <!--./var01/-->
+    <!--/var/var01/-->
+    <br/>
+    <a href="var02/">var02</a>
+    <br/>
+    <a href="forloop/">for</a>
+    <br/>
+    <a href="if01/">if</a>
+    <br/>
+    <a href="if02/">if</a>
+    <br/>
+    <a href="href/">href</a>
+    <br/>
+    <a href="request/">GET</a>
+    <form action="request/" method="post">{% csrf_token %}
+        <input type="submit" value="POST">
+    </form>
+    <!--CSRF(Cross-Site Request Forgery)는 웹 애플리케이션 취약점 중 하나 -->
+    <!--인증된 사용자의 권한을 이용하여 악의적인 요청을 실행하는 공격 형태-->
+
+
+</body>
+</html>

@@ -1,0 +1,18 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+</head>
+<body>
+
+  {% if role == "admin" %}
+    <h1>Admin Page</h1>
+  {% elif role == "manager" %}
+    <h1>Manager Page</h1>
+  {% else %}
+    <h1>User Page</h1>
+  {% endif %}
+
+</body>
+</html>

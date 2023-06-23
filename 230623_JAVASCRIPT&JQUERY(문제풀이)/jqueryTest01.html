@@ -149,25 +149,37 @@
 		});
 	});
 
-	// <fieldset>
-	// 	<legend>문제 9</legend>
-	// 	<h3>"bold" 라는 텍스트가 포함되어 있는 엘리먼트의 텍스트에 bold효과를 적용해주세요.</h3>
-	// 	<div class="box">
-	// 		<span>bold</span><br/>
-	// 		<span>strike</span><br/>
-	// 		<span>blink</span>
-	// 	</div>
-	// 	<br/>
-	// 	<button>버튼</button>
-	// </fieldset>
+
 
 	// <문제9>
 	$(function(){
 		$("button:eq(8)").click(function(){
-			// class="box"의 자식 태그들의
-			// 값을 text로 바꿔서 변수에 넣자 
+			// class="box"의 자식 태그들을 반복적으로 확인해서
+			// 각각 그 값을 text로 다 바꿔서 변수에 넣자 
 			// 만약에 이 값에 "bold"라는 텍스트가 포함되어 있으면
 			// <b></b>태그를 자식 태그로 추가하자
+
+			$(".box").children().each(function(){
+				var value = $(this).text();
+				
+				if (value.includes("bold")) {
+					$(this).html("<b>" + value + "</b>")
+				}
+			})
+		});
+	});
+
+
+
+	// <문제10>
+	$(function(){
+		$("button:eq(9)").click(function(){
+			// input 태그를 찾아서 변수로 넣고
+			// 그 변수를 읽기 전용으로 바꾸고
+			// id="lastQuestion"의 값 폰트 색을 red로 적용
+			var input = $("#lastQuestion");
+			input.prop("readonly", true);
+			input.css("color", "red");
 		});
 	});
 

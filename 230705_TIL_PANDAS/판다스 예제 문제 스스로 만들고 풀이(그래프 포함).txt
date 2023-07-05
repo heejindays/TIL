@@ -1,0 +1,136 @@
+# 문제1. 대분류 '식사' 중 중분류 각각의 비율은?
+
+# 7월 사용 내역 중 대분류가 식사인 항목들의 중분류 가져오기
+meal_pay = card_202007.loc[card_202007["대분류"] == "식사", "중분류"]
+
+# 식사 중분류로 파이 그래프 그리기
+meal_pay.value_counts().plot.pie(autopct="%1.1f%%")
+
+# 범례를 왼쪽 위로
+plt.legend(loc='upper left')
+
+#파이 그래프 타이틀 지정
+plt.title("2020년 7월 식사 분류")
+
+# 그래프 그리기
+plt.show()
+
+
+
+
+
+# 문제2. 전체 사용 금액 대비 할인 받은 금액의 비율은?
+
+# 7월 사용 내역 중 중분류가 '할인'인 것 가져오기
+dis_price = card_202007.loc[card_202007["중분류"] == "할인"]
+
+# 중분류가 '할인'인 항목들 합계
+dis_price_sum = dis_price["금액"].sum()
+
+# 마이너스 제거(절대값) 
+dis_price_sum_abs = abs(dis_price_sum)
+
+# 7월 동안 사용한 전체 금액들을 다 더함
+total_price = card_202007["금액"].sum()
+
+# 그래프 라벨 지정
+labels = ["할인", "비할인"]
+
+# '할인'과' 비할인(전체 - 할인)' 값으로 파이 그래프 그리기
+plt.pie([dis_price_sum_abs, total_price - dis_price_sum_abs], labels=labels ,autopct='%1.1f%%')
+
+# 파이 그래프 타이틀 지정
+plt.title("할인 받은 금액의 비율")
+
+# 범례는 오른쪽 위로
+plt.legend(loc='upper right')
+
+# 그래프 그리기
+plt.show()
+
+
+
+
+
+# 3. 건 당 결제 금액의 분포는?
+(1만원 이하 / 1만원 ~ 3만원 / 3~ 5만원 / 5만원 이상)
+
+# 전체 금액과 구간별 금액 나누기
+pay = card_202007["금액"]
+pay_1 = (pay < 10000).sum()
+pay_2 = ((10000 <= pay) & (pay < 30000)).sum()
+pay_3 = ((30000 <= pay) & (pay < 50000)).sum()
+pay_4 = (pay > 50000).sum()
+
+# x축, y축 구간 지정
+x = ["1만원 미만", "1만원 ~ 3만원", "3만원 ~ 5만원", "5만원 초과"]
+y = [pay_1, pay_2, pay_3, pay_4]
+
+# 바 그래프 그리기 (x, y 지정)
+sns.barplot(x=x, y=y)
+
+# 그래프 타이틀 지정
+plt.title("1건 당 결제 금액 분포")
+
+# 그래프 그리기
+plt.show()
+
+
+
+
+
+# 4. 일자별 누적 사용액
+
+# '누적금액'이라는 새로운 열 만들기
+card_202007["누적금액"] = card_202007["금액"].cumsum()
+
+# 이용일과 누적금액으로 선그래프 만들기
+plt.plot(card_202007['이용일'].dt.day, card_202007['누적금액'])
+
+# 그래프 타이틀 지정
+plt.title('일자별 누적 금액')
+
+# x라벨은 '날짜'로
+plt.xlabel('날짜')
+
+# y라벨은 '누적 금액'으로
+plt.ylabel('누적 금액')
+
+# 그래프 그리기
+plt.show()
+
+
+
+
+
+5. 일자별 '전체' 사용 금액와 '식사' 사용 금액 비교
+
+data = card_202007
+
+# 대분류가 식사인 값들 가져오기
+filtered_data = data[data['대분류'] == '식사']
+
+# 일별 전체 사용 금액의 합계
+daily_amount_total = data.groupby('일')['금액'].sum()
+
+# 일별 식사 사용 금액의 합계
+daily_amount_filtered = filtered_data.groupby('일')['금액'].sum()
+
+# 전체 사용 금액으로 선그래프 그리기
+plt.plot(daily_amount_total.index, daily_amount_total.values, label='전체')
+
+# 일별 식사 사용 금액으로 선그래프 그리기
+plt.plot(daily_amount_filtered.index, daily_amount_filtered.values, label='식사')
+
+# 그래프 타이틀 지정
+plt.title('일자별 사용 금액')
+
+# x축, y축 라벨 지정
+plt.xlabel('일자')
+plt.ylabel('사용 금액')
+
+# 범례 지정
+plt.legend()
+
+# 그래프 그리기
+plt.show()

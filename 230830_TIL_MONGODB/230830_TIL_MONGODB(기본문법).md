@@ -91,14 +91,13 @@
 
 
 
-- 쿼리(조건)는 딱히 지정하지 않음
-  출력하는 조건은 지정
+- **쿼리(조건)는 딱히 지정하지 않고 비워둘 수 있음**
   db.multi.find({}, {name:1})
 
 
 
-- **_id는 안보이고 name만 보고 싶다면
-  db.multi.find({}, {_**id:0, name:1})
+- **id는 안보이게 하고 name만 보고 싶다면**
+  db.multi.find({}, {_id:0, name:1})
 
 
 
@@ -151,7 +150,9 @@
 - **정렬 : 1(asc) / -1(desc)**
   db.multi.find().sort({name:1})
 
-- **아래 두 쿼리는 같은 의미**
+  
+  
+- **아래 두 쿼리는 같은 의미(정렬)**
   select * from multi order by name desc;
   db.multi.find().sort({name:-1})
 
@@ -175,7 +176,7 @@
 
 
 
-- _id 필드를 제외한 모든 필드를 반환
+- **id 필드를 제외한 모든 필드를 반환**
   첫 번째 문서를 건너뛰고 나머지 문서들을 반환
   db.multi.find({}, {_id:0}).skip(1)
 
@@ -195,67 +196,85 @@
   db.multi.replaceOne({midterm: {$exists:true}}, {name:"hong-gd", kor:100, eng:0, math:0})
   db.multi.replaceOne({ midterm: { $exists: true }, name: "hong-gd" }, { name: "hong-gd", kor: 100, eng: 0, math: 0 })
   db.multi.updateMany({kor: {$lte:90}}, {$set: {kor:0}})
+  
+  
 
 
-- matchedCount -> 내가 바꾸려는 갯수
+- matchedCount : 내가 바꾸려는 갯수
 
-- modifiedCount -> 변경된 것들의 갯수
-
-- updateOne : 조건에 맞는거 찾아서 1개 바꾸기 (field)
-  updateMany : 조건에 맞는거 찾아서 다 바꾸기 (field)
-  replaceOne : 조건에 맞는거 찾아서 문서 변경 (document)
+- modifiedCount : 변경된 것들의 갯수
 
   
 
-function updateKor(){
-var tmp = db.multi.updateMany({kor: {$eq:0}}, {$set: {kor:80}})
-return tmp
-}
+- updateOne : 조건에 맞는거 찾아서 1개 바꾸기 (field)
+  
+- updateMany : 조건에 맞는거 찾아서 다 바꾸기 (field)
+  
+- replaceOne : 조건에 맞는거 찾아서 문서 변경 (document)
+  
+  
 
-updateKor()
+- **hong-gd 하나를 지우고 싶음**
+  db.multi.deleteOne({name:'hong-gd'})
+  deletedCount: 1
 
-hong-gd 하나를 지우고 싶음
-db.multi.deleteOne({name:'hong-gd'})
-deletedCount: 1
+  
+
+- **class 있는 걸 다 지우고 싶음**
+  db.multi.deleteMany({class: {$exists: true}})
+  deletedCount: 3
+
+  
+
+- **delete로 지우면 아직 남아있음**
+  db.multi.deleteMany({})
+
+  
+
+- **drop으로 지우면 collection까지 다 사라짐**
+  db.multi.drop()
+
+  
+
+- **두 개의 문서를 두 개의 다른 방식으로 myfriends 컬렉션에 추가할 수 있음**
+  (방법1) db.myfriends.insert({name:'아이언맨', buddy: ['토르', '헐크', '호크아이']})
+  (방법2) db.myfriends.insertOne({name: '슈퍼맨', buddy: ['배트맨', '원더우먼', '아쿠아맨', '조커']})
 
 
-class 있는 걸 다 지우고 싶음
-db.multi.deleteMany({class: {$exists: true}})
-deletedCount: 3
 
-delete로 지우면 아직 남아있음
-db.multi.deleteMany({})
-
-drop으로 지우면 collection까지 다 사라짐
-db.multi.drop()
+- **name이 아이언맨인 문서에 추가 하기**
+  db.myfriends.updateOne({name:'아이언맨'}, {$push: {buddy : {$each: ['캡틴아메리카', '블랙위도우']}}})
 
 
-두 개의 문서를 두 개의 다른 방식으로 myfriends 컬렉션에 추가
-db.myfriends.insert({name:'아이언맨', buddy: ['토르', '헐크', '호크아이']})
-db.myfriends.insertOne({name: '슈퍼맨', buddy: ['배트맨', '원더우먼', '아쿠아맨', '조커']})
+
+- **삭제 (pull도 가능)**
+  db.myfriends.updateOne({name:'슈퍼맨'}, {$pop: {buddy:1}})
 
 
-name이 아이언맨인 문서에 추가 하기
-db.myfriends.updateOne({name:'아이언맨'}, {$push: {buddy : {$each: ['캡틴아메리카', '블랙위도우']}}})
 
+- **aggregate :**
 
-삭제 (pull도 가능)
-db.myfriends.updateOne({name:'슈퍼맨'}, {$pop: {buddy:1}})
+  - MongoDB에서 복잡한 데이터 처리 작업을 수행하기 위해 사용되는 
 
-$field = $$current.field
+  - 집계(aggregation) 파이프라인
 
-db.multi.insertMany([
-{name:'hong-gd', kor:65, eng:60, math:100},
-{name:'kim-sd', kor:100, eng:100, math:40},
-{name:'you-js', kor:96, eng:40, math:100},
-])
+    
 
-db.multi.aggregate(
-{$match: {kor:{$gt:50}}},
-{$project: {kor:1}},
-{$group: {_id:'test', 'average': {$avg: '$kor'}}}
-)
+  db.multi.aggregate([
+    { $match: { kor: { $gt: 50 } } },
+    { $project: { kor: 1 } },
+    { $group: { _id: 'test', 'average': { $avg: '$kor' } } }
+  ]);
 
+  
+
+  1. `$match`: "kor" 필드가 50보다 큰 값을 가진 문서를 필터링
+
+  2. `$project`: 결과 문서에서 "kor" 필드만을 유지
+
+  3. `$group`: 결과 문서들을 하나의 그룹으로 묶고, "kor" 필드의 평균을 계산
+
+     
 
 db.score.insertMany([
    {name:"홍길동",kor:90,eng:80,math:98,test:"midterm"},
@@ -277,10 +296,10 @@ db.score.aggregate(
 {$group: {_id:'$test', average: {$avg: '$kor'}}}
 )
 
-test가 final인 document들만 가지고
-eng 필드만 사용하여
-eng 필드의 평균을 출력하자
-결과형태 : _id : 'test'. average:??
+**(문제) test가 final인 document들만 가지고**
+**eng 필드만 사용하여**
+**eng 필드의 평균을 출력하자**
+결과형태 : _id : 'test'. average:
 
 db.score.aggregate(
 {$match: {test:'final'}},

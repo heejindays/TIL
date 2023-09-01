@@ -235,7 +235,6 @@
 
   - sudo head -n 5 /etc/sudoers
 
-    
 
 <br>
 
@@ -246,3 +245,130 @@
 
 - 아래에서 10줄만 보여주기
   - sudo tail -n 5 /etc/sudoers
+
+<br>
+
+- ps -ef : Process Status Every Full Format
+- (현재 실행되고 있는 모든 프로세스를 자세하게 보고싶다)
+  - UID : user id
+  - PID : process id
+  - PPID : parent pid
+  - C : cpu 사용량
+  - STIME : 시작 시간
+  - TTY : 외부에서 내부에 접근하는 방식
+  - tty : teletype (외부접속)
+  - pty : pseudo tty (가상 터미널 접속)
+  - pts : pseudo terminal slave (원격 터미널 접속)
+  - CMD : 실행 명령어
+
+<br>
+
+- 파일 계열
+  - .deb : debian 계열 설치파일
+  - .rpm : redhat 계열
+  - .tar.gz : 압축 파일
+
+<br>
+
+- ps -ef | more
+  - 앞에 쓰인 명령어를 바탕으로 뒤에 명령어 실행 (파이프라인처럼)
+
+<br>
+
+- ps -ef | grep python
+  - "python"이라는 단어가 있는 라인만 보고싶을 때
+
+<br>
+
+- ps -ef | grep java
+  - "java"라는 단어가 있는 라인만 보고싶을 때
+
+<br>
+
+- amazon coretto
+- wget https://corretto.aws/downloads/latest/amazon-corretto-11-x64-linux-jdk.tar.gz
+- 압축 풀기 : tar -xvzf amazon-corretto-11-x64-linux-jdk.tar.gz 
+
+<br>
+
+- 숨겨진 것까지 자세하게 보고 싶을 때
+  - ls -a
+
+<br>
+
+- symbolic link (즐겨찾기 개념)
+  - ln -s amazon-corretto-11.0.20.9.1-linux-x64/ java
+
+<br>
+
+- 동작 순서
+  - /etc/profile > ~/.bash_profile > ~/bash_login > ~/.profile
+  - .bashrc 위의 파일들 중 어딘가에서 파일이 존재하는지 확인 후 호출
+
+<br>
+
+- 경로 설정
+  - export JAVA_HOME=/home/big/java
+  - export PATH=$PATH:$JAVA_HOME/bin
+- 버전 확인
+  - java --version
+  - javac --version
+
+<br>
+
+**`grep`은 텍스트 데이터에서 원하는 부분을 검색하고 추출하는 유용한 명령어**
+
+<br>
+
+- grep 'J' README.md : 이렇게 찾으면 대문자만 찾게됨
+
+- -i : 대소문자 무시하고 다 찾고자 할 때
+  - grep -i 'java' README.mddate
+
+<br>
+
+- java or jdk를 찾고 싶을 때
+  - grep -i 'java\|jdlk' README.md
+
+<br>
+
+- .* 어떤 글자든 0개 이상 (java랑 jdk 모두 함께 포함되는)
+  - grep -i 'java.*jdk' README.md
+
+<br>
+
+- corretto 라는 단어로 시작하는 라인 찾기
+  - grep -i '^corretto' README.md
+
+<br>
+
+- 라인 번호 추가
+  - grep -i -n 'amazon' README.md
+
+<br>
+
+- ls -l > ~/javalist
+  - 현재 디렉토리의 파일 및 디렉토리 목록을 상세한 형식으로 나열
+  - 이 목록을 `javalist`라는 파일에 저장
+  -  `>` 연산자를 사용하여 파일을 덮어쓰기 모드로  엶
+
+<br>
+
+- 현재 날짜와 시간을 표시하는 명령
+  - date
+
+<br>
+
+- `date` 명령의 결과를 `javalist` 파일에 덮어쓰기 모드로 저장
+  - date > javalist
+
+<br>
+
+- `date` 명령의 결과를 `javalist` 파일에 덧붙이기 모드로 저장
+  - date >> javalist
+
+<br>
+
+- userdel 사용자 삭제 명령
+  - sudo userdel -rf test
+  - sudo userdel -rf multi
